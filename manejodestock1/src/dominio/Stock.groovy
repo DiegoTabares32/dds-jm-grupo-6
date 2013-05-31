@@ -6,7 +6,7 @@ class Stock {
 	
 	List<ProductoFinal> componentes
 	
-	public reservar(producto)
+	public reservar(ProductoFinal producto)
 	{
 		if (componentes.contains(producto))
 		{
