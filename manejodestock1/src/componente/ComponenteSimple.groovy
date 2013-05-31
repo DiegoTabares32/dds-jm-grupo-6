@@ -1,5 +1,19 @@
 package componente
 
-class ComponenteSimple extends ProductoFinal {
+import dominio.Stock
 
+class ComponenteSimple extends ProductoFinal {
+	
+	@Override
+	public void reservar(Stock stock)
+	{
+		if(stock.componentes.contains(this))
+		{
+			stock.componentes.remove(this)
+		}
+		else
+		{
+			fabrica.reservar(this)
+		}
+	}
 }
