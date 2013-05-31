@@ -1,5 +1,0 @@
-package componente
-
-class Componente {
-
-}
