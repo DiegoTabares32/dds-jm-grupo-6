@@ -1,0 +1,5 @@
+package componente
+
+class Componente {
+
+}
