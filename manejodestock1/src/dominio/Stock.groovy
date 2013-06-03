@@ -4,7 +4,13 @@ import componente.ProductoFinal
 
 class Stock {
 	
+	Fabrica fabrica
 	List<ProductoFinal> componentes
+	
+	public Stock(Fabrica fabrica)
+	{
+		this.fabrica = fabrica
+	}
 	
 	public reservar(ProductoFinal producto)
 	{
@@ -18,5 +24,9 @@ class Stock {
 		}	
 	}
 	
+	public void fabricar(ProductoFinal producto)
+	{
+		fabrica.reservar(producto)
+	}
 
 }

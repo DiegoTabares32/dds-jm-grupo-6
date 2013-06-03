@@ -13,7 +13,7 @@ class ComponenteSimple extends ProductoFinal {
 		}
 		else
 		{
-			fabrica.reservar(this)
+			stock.fabricar(this)
 		}
 	}
 }
