@@ -1,12 +1,12 @@
 package dominio
 
-import componentes.Componente
+import componente.ProductoFinal
 
 class Stock {
 	
 	Fabrica fabrica
 	List<ProductoFinal> componentes
-
+	
 	public Stock(Fabrica fabrica)
 	{
 		this.fabrica = fabrica
@@ -16,22 +16,17 @@ class Stock {
 	{
 		if (componentes.contains(producto))
 		{
-			
 				componentes.remove(producto)
-				
-				//producto.notificar(this)
 		}
 		else
 		{
 				producto.reservar(this)
 		}	
 	}
-
-	public void fabricar(Componente producto)
+	
+	public void fabricar(ProductoFinal producto)
 	{
 		fabrica.reservar(producto)
 	}
-	
-	//cuando ingresa stock producto.notificar(this)
-	//no se bien donde ubicarlo
+
 }
