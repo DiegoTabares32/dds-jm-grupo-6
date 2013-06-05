@@ -1,15 +1,16 @@
 package componente
 
-import dominio.Stock
+import observadores.*
 
 class ComponenteCompuesto extends ProductoFinal {
 	
 	private List<ProductoFinal> componentes
 	
-	public ComponenteCompuesto(Stock stock)
+	public ComponenteCompuesto()
 	{
-		this.stock = stock
+		this.stock = 0
 		this.puntoDePedido = 2
+		this.observadores = new ArrayList<Observador>()
 		this.componentes = new ArrayList<ProductoFinal>()
 	}
 	
@@ -21,9 +22,18 @@ class ComponenteCompuesto extends ProductoFinal {
 	@Override
 	public void reservar()
 	{
-		for(componente in componentes)
+		if(stock>0)
 		{
-			componente.reservar()
+			stock--
+			this.notificarObservadores()
+		}else
+		{
+			for(componente in componentes)
+			{
+				componente.reservar()
+			}
+		
+			this.aumentarStock()				
 		}
 	}
 	

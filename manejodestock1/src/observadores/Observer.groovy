@@ -1,5 +1,0 @@
-package observadores
-
-interface Observer {
-
-}

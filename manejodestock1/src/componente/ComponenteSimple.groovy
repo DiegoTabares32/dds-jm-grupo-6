@@ -1,33 +1,28 @@
 package componente
 
-import dominio.Stock
+import observadores.Observador
 
 class ComponenteSimple extends ProductoFinal {
 	
-	public ComponenteSimple(Stock stock){
-		this.stock = stock
+	public ComponenteSimple(){
+		this.stock = 0
+		this.observadores = new ArrayList<Observador>()
 		this.puntoDePedido = 4
 	}
 	
 	@Override
 	public void reservar()
 	{
-		if(stock.tenes(this))
+		if(stock>0)
 		{
-			stock.componentes.remove(this)
+			stock--
+			this.notificarObservadores()
 		}
 		else
 		{
-			stock.fabricar(this)
+			this.fabricar()
+			this.notificarObservadores()
 		}
 	}
 	
-	public void aumentarStock()
-	{
-		int i
-		for(i=0;i< this.puntoDePedido;i++)
-		{
-			stock.agregar(new ComponenteSimple(stock))
-		}
-	}
 }
