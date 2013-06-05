@@ -6,6 +6,6 @@ class Fabrica {
 
 	public void reservar(ProductoFinal producto)
 	{
-		
+		producto.aumentarStock()
 	}
 }

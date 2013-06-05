@@ -2,9 +2,22 @@ package componente
 
 import dominio.*
 
-class ProductoFinal {
+public abstract class ProductoFinal {
 
-		private Fabrica fabrica
+		protected Fabrica fabrica
+		protected Stock stock
+		protected int puntoDePedido
 		
-		public void reservar(Stock stock){}
+		public void reservar(){}
+		
+		public void agregarComponente(ProductoFinal producto){}
+		
+		public void aumentarStock()
+		{
+			int i
+			for(i=0;i < puntoDePedido;i++)
+			{
+				stock.agregar(new ComponenteCompuesto(stock))
+			}
+		}
 }

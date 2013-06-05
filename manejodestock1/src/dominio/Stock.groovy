@@ -1,26 +1,28 @@
 package dominio
 
 import componente.ProductoFinal
+import dominio.Fabrica
 
 class Stock {
 	
 	Fabrica fabrica
-	List<ProductoFinal> componentes
+	List<ProductoFinal> componentes 
 	
 	public Stock(Fabrica fabrica)
 	{
 		this.fabrica = fabrica
+		this.componentes = new ArrayList<ProductoFinal>()
 	}
 	
 	public reservar(ProductoFinal producto)
 	{
-		if (componentes.contains(producto))
+		if (this.tenes(producto))
 		{
 				componentes.remove(producto)
 		}
 		else
 		{
-				producto.reservar(this)
+				producto.reservar()
 		}	
 	}
 	
@@ -28,5 +30,14 @@ class Stock {
 	{
 		fabrica.reservar(producto)
 	}
-
+	
+	public boolean tenes(ProductoFinal producto)
+	{
+		return this.componentes.contains(producto)
+	}
+	
+	public void agregar(ProductoFinal producto)
+	{
+		this.componentes.add(producto)
+	}
 }
