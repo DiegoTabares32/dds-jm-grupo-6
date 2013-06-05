@@ -1,6 +1,6 @@
 package dominio
 
-import componente.ProductoFinal
+import componentes.Componente
 
 class Empresa {
 	
@@ -11,7 +11,7 @@ class Empresa {
 		this.stock = unStock
 	}
 	
-	public traer(ProductoFinal producto)
+	public traer(Componente producto)
 	{
 			stock.reservar(producto)
 	}
