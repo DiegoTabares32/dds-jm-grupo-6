@@ -14,7 +14,7 @@ class Tests {
 	void inicializar()
 	{
 		this.banda = new Banda()
-		banda.categoria = 3
+		banda.categoriaBanda = 3
 		this.noche = new Noche()
 	}
 	
@@ -30,8 +30,8 @@ class Tests {
 	{
 		Banda banda2 = new Banda()
 		Banda banda3 = new Banda()
-		banda3.categoria = 4
-		banda2.categoria = 2
+		banda3.categoriaBanda = 4
+		banda2.categoriaBanda = 2
 		this.noche.agregarBanda(banda)
 		this.noche.agregarBanda(banda3)
 		this.noche.agregarBanda(banda2)
@@ -45,8 +45,8 @@ class Tests {
 		this.noche.agregarBanda(banda)
 		Banda banda2 = new Banda()
 		Banda banda3 = new Banda()
-		banda3.categoria = 4
-		banda2.categoria = 2
+		banda3.categoriaBanda = 4
+		banda2.categoriaBanda = 2
 		this.noche.agregarBanda(banda2)
 		this.noche.agregarBanda(banda3)
 		assert this.noche.getValorExtra() == 200.0

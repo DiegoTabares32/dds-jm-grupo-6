@@ -26,6 +26,9 @@ class Planificacion {
 	
 	public void comprarEntrada(Noche noche, Ubicacion ubicacion)
 	{
-		noche.comprarUbicacion(ubicacion)
+		if (noche.comprarUbicacion(ubicacion))
+			println("La ubicacion fue comprada")
+		else
+			println("La transaccion no pudo ser realizada")
 	}
 }
