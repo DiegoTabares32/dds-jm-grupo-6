@@ -9,6 +9,7 @@ class Tests {
 	
 	private Banda banda
 	private Noche noche
+	private Planificacion planificacion
 	
 	@Before
 	void inicializar()
@@ -53,11 +54,33 @@ class Tests {
 	}
 	
 	@Test
-	void comprarEntrada()
+	void calcularPrecio()
 	{
 		Entrada entrada = new Entrada(new Jubilado())
 		Ubicacion ubicacion = new Ubicacion("azul", 5, 32.0)
 		noche.agregarBanda(banda)
 		assert entrada.getPrecio(ubicacion, noche)==(127.2)	
+	}
+	
+	@Test
+	void sePudoComprarEntrada(){
+		Entrada entrada = new Entrada(new PersonaMenor())
+		this.planificacion = new Planificacion()
+		Ubicacion ubicacion = new Ubicacion("naranja", 7, 50.0)
+		this.noche.ubicacionesNoche.add(ubicacion)
+		planificacion.comprarEntrada(noche, ubicacion)
+		assert(noche.ubicacionesNoche.size)==0
+		
+	}
+	
+	@Test
+	void noSePudoComprarEntrada(){
+		Entrada entrada = new Entrada(new PersonaMenor())
+		this.planificacion = new Planificacion()
+		Ubicacion ubicacion = new Ubicacion("naranja", 7, 50.0)
+		Ubicacion ubicacion2 = new Ubicacion("verde", 6, 25.0)
+		this.noche.ubicacionesNoche.add(ubicacion)
+		planificacion.comprarEntrada(noche, ubicacion2)
+		assert(noche.ubicacionesNoche.size)==1
 	}
 }
