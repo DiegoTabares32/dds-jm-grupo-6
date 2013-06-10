@@ -4,19 +4,26 @@ import dominio.*
 import estrategia.*
 import org.junit.Test
 import org.junit.Before
+import excepciones.*
 
 class Tests {
 	
 	private Banda banda
 	private Noche noche
 	private Planificacion planificacion
+	private Persona persona
+	private Entrada entrada
 	
 	@Before
 	void inicializar()
 	{
 		this.banda = new Banda()
-		banda.categoriaBanda = 3
+		banda.categoria = 3
 		this.noche = new Noche()
+		this.planificacion = new Planificacion()
+		this.entrada = new Entrada()
+		this.persona = new Persona(new Jubilado())
+		this.planificacion = new Planificacion()
 	}
 	
 	@Test
@@ -31,8 +38,8 @@ class Tests {
 	{
 		Banda banda2 = new Banda()
 		Banda banda3 = new Banda()
-		banda3.categoriaBanda = 4
-		banda2.categoriaBanda = 2
+		banda3.categoria = 4
+		banda2.categoria = 2
 		this.noche.agregarBanda(banda)
 		this.noche.agregarBanda(banda3)
 		this.noche.agregarBanda(banda2)
@@ -46,41 +53,50 @@ class Tests {
 		this.noche.agregarBanda(banda)
 		Banda banda2 = new Banda()
 		Banda banda3 = new Banda()
-		banda3.categoriaBanda = 4
-		banda2.categoriaBanda = 2
+		banda3.categoria = 4
+		banda2.categoria = 2
 		this.noche.agregarBanda(banda2)
 		this.noche.agregarBanda(banda3)
 		assert this.noche.getValorExtra() == 200.0
 	}
 	
 	@Test
-	void calcularPrecio()
+	void comprarEntrada()
 	{
-		Entrada entrada = new Entrada(new Jubilado())
 		Ubicacion ubicacion = new Ubicacion("azul", 5, 32.0)
 		noche.agregarBanda(banda)
-		assert entrada.getPrecio(ubicacion, noche)==(127.2)	
+		assert entrada.getPrecio(ubicacion, noche, persona)==(127.2)	
 	}
 	
 	@Test
-	void sePudoComprarEntrada(){
-		Entrada entrada = new Entrada(new PersonaMenor())
-		this.planificacion = new Planificacion()
-		Ubicacion ubicacion = new Ubicacion("naranja", 7, 50.0)
-		this.noche.ubicacionesNoche.add(ubicacion)
-		planificacion.comprarEntrada(noche, ubicacion)
-		assert(noche.ubicacionesNoche.size)==0
-		
+	void personaCompraEntrada()
+	{
+		noche.agregarBanda(banda)
+		planificacion.cargarUbicaciones([new Ubicacion("azul", 5, 32.0), new Ubicacion("azul", 6, 70.0)])
+		planificacion.cargarNoche(noche)
+		List<Ubicacion> ubis = planificacion.buscarUbicacionesParaNoche(noche)
+		entrada.comprar(ubis.first(), noche, persona)
+		assert planificacion.buscarUbicacionesParaNoche(noche).size().equals(1)
 	}
 	
 	@Test
-	void noSePudoComprarEntrada(){
-		Entrada entrada = new Entrada(new PersonaMenor())
-		this.planificacion = new Planificacion()
-		Ubicacion ubicacion = new Ubicacion("naranja", 7, 50.0)
-		Ubicacion ubicacion2 = new Ubicacion("verde", 6, 25.0)
-		this.noche.ubicacionesNoche.add(ubicacion)
-		planificacion.comprarEntrada(noche, ubicacion2)
-		assert(noche.ubicacionesNoche.size)==1
+	void notificarUbicacionNoDisponilbeAlComprar()
+	{
+		noche.agregarBanda(banda)
+		Ubicacion ubi1 = new Ubicacion("azul", 5, 32.0)
+		Ubicacion ubi2 = new Ubicacion("azul", 6, 70.0)
+		planificacion.cargarUbicaciones([ubi1, ubi2 ])
+		planificacion.cargarNoche(noche)
+		// Compra la ubi1
+		entrada.comprar(ubi1, noche, persona)
+		try
+		{
+			//Al querer comprar la ubi1 de nuevo, se lanza la excpecion
+			entrada.comprar(ubi1, noche, persona)			
+		}
+		catch(UbicacionNoDisponibleException e)
+		{
+			assert planificacion.buscarUbicacionesParaNoche(noche).size().equals(1)
+		}
 	}
 }

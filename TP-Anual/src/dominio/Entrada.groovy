@@ -1,18 +1,20 @@
 package dominio
 
-import estrategia.Tipo;
+import estrategia.Tipo
+import excepciones.* 
 
 class Entrada {
 	
-	Tipo tipo
+	private Persona comprador
 	
-	public Entrada(Tipo tipo)
+	public double getPrecio(Ubicacion ubicacion, Noche noche, Persona persona)
 	{
-		this.tipo = tipo	
+		return ubicacion.getValorBase() + noche.getValorExtra() - persona.getDescuento(ubicacion.getValorBase())
 	}
 	
-	public double getPrecio(Ubicacion ubicacion, Noche noche)
+	public void comprar(Ubicacion ubicacion, Noche noche, Persona persona)
 	{
-		return ubicacion.getValorBase() + noche.getValorExtra() - tipo.getDescuento(ubicacion.getValorBase())
+		noche.comprarUbicacion(ubicacion)
+		this.comprador = persona			
 	}
 }

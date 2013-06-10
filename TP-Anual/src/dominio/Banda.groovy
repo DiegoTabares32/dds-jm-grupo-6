@@ -2,13 +2,7 @@ package dominio
 
 class Banda {
 
-	private byte categoriaBanda
+	private byte categoria
 	
-	public void setCategoriaBanda(categoria){
-		this.categoriaBanda = categoria
-	}		
 	
-	public byte getCategoriaBanda(){
-		return this.categoriaBanda
-	}
 }

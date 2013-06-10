@@ -16,7 +16,7 @@ class Planificacion {
 		this.noches.add(noche)	
 	}
 		
-	public List<Ubicacion> buscarEntradasParaNoche(Noche noche)
+	public List<Ubicacion> buscarUbicacionesParaNoche(Noche noche)
 	{
 		if(noches.contains(noche))
 		{
@@ -24,11 +24,4 @@ class Planificacion {
 		}
 	}
 	
-	public void comprarEntrada(Noche noche, Ubicacion ubicacion)
-	{
-		if (noche.comprarUbicacion(ubicacion))
-			println("La ubicacion fue comprada")
-		else
-			println("La transaccion no pudo ser realizada")
-	}
 }
