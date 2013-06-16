@@ -9,27 +9,27 @@ import componente.*
 
 class Tests {
 
-	private Fabrica fabrica
-	private ProductoFinal productoSimple
-	private ComponenteCompuesto productoCompuesto
+	def fabrica
+	def productoSimple
+	def productoCompuesto
 
 	@Before
-	public void inicializar() {
-		this.fabrica = new Fabrica()
-		this.productoSimple = new ComponenteSimple()
-		this.productoCompuesto = new ComponenteCompuesto()
+	void inicializar() {
+		fabrica = new Fabrica()
+		productoSimple = new ComponenteSimple(stock: 0, puntoDePedido: 4)
+		productoCompuesto = new ComponenteCompuesto(stock: 0, puntoDePedido: 2)
 	}
 
 	@Test
 	void reservarProductoSimple() {
-		this.fabrica.reservar(this.productoSimple)
+		fabrica.reservar(productoSimple)
 		assert this.productoSimple.stock.equals(4)
 	}
 
 	@Test
 	void reservarProductoCompuesto() {
-		this.productoCompuesto.agregarComponente(this.productoSimple)
-		this.fabrica.reservar(this.productoCompuesto)
+		productoCompuesto.agregarComponente(productoSimple)
+		fabrica.reservar(productoCompuesto)
 		assert this.productoCompuesto.stock.equals(2) && this.productoSimple.stock.equals(4)
 	}
 }

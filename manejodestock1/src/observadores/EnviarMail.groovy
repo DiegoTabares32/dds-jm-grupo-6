@@ -1,24 +1,20 @@
 package observadores
 
-import componente.ProductoFinal;
+class EnviarMail {
 
-class EnviarMail implements Observador{
+	def unidadesRetiradas
+	def stockInicial
+	def mailsEnviados = 0
 
-	private int unidadesRetiradas
-	private int stockInicial
-	private int mailsEnviados
-
-	public EnviarMail(ProductoFinal producto, int unidades) {
-		this.unidadesRetiradas = unidades
-		this.mailsEnviados = 0
-		this.stockInicial = producto.stock
+	EnviarMail(producto, unidades) {
+		unidadesRetiradas = unidades
+		stockInicial = producto.stock
 	}
 
-	@Override
-	public void actualizar(ProductoFinal producto) {
-		if((producto.stock - this.stockInicial) >= unidadesRetiradas) {
+	def actualizar(producto) {
+		if((producto.stock - stockInicial) >= unidadesRetiradas) {
 			//Se envia el mail con la informacion correspondiente
-			this.mailsEnviados++
+			mailsEnviados++
 		}
 	}
 }

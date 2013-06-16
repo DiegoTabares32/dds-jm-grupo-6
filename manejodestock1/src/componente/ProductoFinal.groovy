@@ -1,39 +1,30 @@
 package componente
 
 import dominio.*
-import observadores.Observador
 
-public abstract class ProductoFinal {
+abstract class ProductoFinal {
 
-	protected int stock
-	protected int puntoDePedido
-	protected int stockMinimo
-	protected int stockMaximo
-	protected List<Observador> observadores
+	def stock
+	def puntoDePedido
+	def stockMinimo
+	def stockMaximo
+	def observadores = []
+	
+	abstract reservar()
 
-	public void reservar(){
-
+	def agregarObservador(observador) {
+		observadores << observador
 	}
 
-	public void agregarComponente(ProductoFinal producto){
-
+	def fabricar() {
+		aumentarStock()
 	}
 
-	public void agregarObservador(Observador observador) {
-		this.observadores.add(observador)
+	def aumentarStock() {
+		stock += puntoDePedido
 	}
 
-	public void fabricar() {
-		this.aumentarStock()
-	}
-
-	public void aumentarStock() {
-		this.stock += this.puntoDePedido
-	}
-
-	public void notificarObservadores() {
-		for(observador in this.observadores) {
-			observador.actualizar(this)
-		}
+	def notificarObservadores() {
+		observadores.each { it.actualizar(this) }
 	}
 }

@@ -1,34 +1,28 @@
 package observadores
 
-import componente.ProductoFinal;
+class Auditoria  {
 
-class Auditoria implements Observador{
+	def stockMinimoAnterior
+	def logsAumentoStockMinimo = 0
+	def logsDecrementoStockMinimo = 0
+	def logsExcesoDeStock = 0
 
-	private int stockMinimoAnterior
-	private int logsAumentoStockMinimo
-	private int logsDecrementoStockMinimo
-	private int logsExcesoDeStock
-
-	public Auditoria(ProductoFinal producto) {
-		this.stockMinimoAnterior = producto.stockMinimo
-		this.logsAumentoStockMinimo = 0
-		this.logsDecrementoStockMinimo = 0
-		this.logsExcesoDeStock = 0
+	Auditoria(producto) {
+		stockMinimoAnterior = producto.stockMinimo
 	}
 
-	@Override
-	public void actualizar(ProductoFinal producto) {
-		if(producto.stockMinimo < this.stockMinimoAnterior) {
+	def actualizar(producto) {
+		if(producto.stockMinimo < stockMinimoAnterior) {
 			//Se genera un log de auditoria
-			this.logsDecrementoStockMinimo++
+			logsDecrementoStockMinimo++
 		}
 		if(producto.stock > producto.stockMinimo) {
 			//Se loguea el hecho de que dejo de estar por debajo de su stock minimo
-			this.logsAumentoStockMinimo++
+			logsAumentoStockMinimo++
 		}
 		if(producto.stock > producto.stockMaximo) {
 			//Se registra el evento
-			this.logsExcesoDeStock++
+			logsExcesoDeStock++
 		}
 	}
 }

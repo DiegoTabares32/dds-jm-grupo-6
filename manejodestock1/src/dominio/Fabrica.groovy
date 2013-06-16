@@ -4,7 +4,7 @@ import componente.ProductoFinal
 
 class Fabrica {
 
-	public void reservar(ProductoFinal producto) {
+	def reservar(producto) {
 		producto.reservar()
 	}
 }

@@ -4,29 +4,18 @@ import observadores.*
 
 class ComponenteCompuesto extends ProductoFinal {
 
-	private List<ProductoFinal> componentes
+	def componentes = []
 
-	public ComponenteCompuesto() {
-		this.stock = 0
-		this.puntoDePedido = 2
-		this.observadores = new ArrayList<Observador>()
-		this.componentes = new ArrayList<ProductoFinal>()
+	def agregarComponente(componente) {
+		this.componentes << componente
 	}
 
-	public void agregarComponente(ProductoFinal componente) {
-		this.componentes.add(componente)
-	}
-
-	@Override
-	public void reservar() {
+	def reservar() {
 		if(stock>0) {
 			stock--
 			this.notificarObservadores()
 		}else {
-			for(componente in componentes) {
-				componente.reservar()
-			}
-
+			componentes.each { it.reservar() }
 			this.aumentarStock()
 		}
 	}

@@ -1,21 +1,14 @@
 package observadores
 
-import componente.ProductoFinal;
+class OrdenCompra {
 
-class OrdenCompra implements Observador{
+	def ordenes = []
 
-	private List<ProductoFinal> ordenes
-
-	public OrdenCompra() {
-		this.ordenes = new ArrayList<ProductoFinal>()
-	}
-
-	@Override
-	public void actualizar(ProductoFinal producto) {
+	def actualizar(producto) {
 		if(producto.stock < producto.stockMinimo) {
 			//Se genera una orden de compra registrando
 			//los datos del producto y la cantidad a pedir
-			this.ordenes.add(producto)
+			ordenes << producto
 		}
 	}
 }
