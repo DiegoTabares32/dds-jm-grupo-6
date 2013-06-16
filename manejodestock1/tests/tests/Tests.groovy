@@ -30,6 +30,7 @@ class Tests {
 	void reservarProductoCompuesto() {
 		productoCompuesto.agregarComponente(productoSimple)
 		fabrica.reservar(productoCompuesto)
-		assert this.productoCompuesto.stock.equals(2) && this.productoSimple.stock.equals(4)
+		assert this.productoCompuesto.stock.equals(2) 
+		assert this.productoSimple.stock.equals(4)
 	}
 }
